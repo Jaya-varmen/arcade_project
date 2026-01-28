@@ -1,21 +1,27 @@
 import arcade
 
-SCREEN_WIDTH = 1000
-SCREEN_HEIGHT = 700
-SCREEN_TITLE = "Typing Fall (v0)"
+from src.typing_fall.constants import (
+    SCREEN_WIDTH,
+    SCREEN_HEIGHT,
+    SCREEN_TITLE,
+    BG_COLOR,
+    TEXT_COLOR,
+    SUBTEXT_COLOR,
+)
 
 
 class StartView(arcade.View):
     def on_show_view(self):
-        arcade.set_background_color(arcade.color.DARK_SLATE_GRAY)
+        arcade.set_background_color(BG_COLOR)
 
     def on_draw(self):
         self.clear()
+
         arcade.draw_text(
             "Typing Fall",
             SCREEN_WIDTH / 2,
             SCREEN_HEIGHT / 2 + 40,
-            arcade.color.WHITE,
+            TEXT_COLOR,
             font_size=48,
             anchor_x="center",
         )
@@ -23,14 +29,13 @@ class StartView(arcade.View):
             "Press ENTER to start (placeholder)",
             SCREEN_WIDTH / 2,
             SCREEN_HEIGHT / 2 - 20,
-            arcade.color.LIGHT_GRAY,
+            SUBTEXT_COLOR,
             font_size=20,
             anchor_x="center",
         )
 
     def on_key_press(self, symbol: int, modifiers: int):
         if symbol == arcade.key.ENTER:
-            # пока просто закрываем окно (дальше заменим на меню)
             arcade.close_window()
 
 
