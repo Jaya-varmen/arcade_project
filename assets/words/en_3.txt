@@ -1,0 +1,5 @@
+responsibility
+performance
+architecture
+configuration
+interaction
