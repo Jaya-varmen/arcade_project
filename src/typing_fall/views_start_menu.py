@@ -151,5 +151,14 @@ class MenuView(arcade.View):
             from src.typing_fall.views_settings import SettingsView
             self.router.go(SettingsView(self.router))
 
+        elif symbol == arcade.key.KEY_2:
+            # Пока заглушка результатов (потом сюда подключим старт игры)
+            from src.typing_fall.views_results_leaderboard import ResultsView
+            self.router.go(ResultsView(self.router, score=0, wpm=0.0, accuracy=0.0))
+
+        elif symbol == arcade.key.KEY_3:
+            from src.typing_fall.views_results_leaderboard import LeaderboardView
+            self.router.go(LeaderboardView(self.router))
+
         elif symbol == arcade.key.ESCAPE:
             arcade.close_window()
