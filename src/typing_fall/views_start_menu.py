@@ -152,9 +152,9 @@ class MenuView(arcade.View):
             self.router.go(SettingsView(self.router))
 
         elif symbol == arcade.key.KEY_2:
-            # Пока заглушка результатов (потом сюда подключим старт игры)
-            from src.typing_fall.views_results_leaderboard import ResultsView
-            self.router.go(ResultsView(self.router, score=0, wpm=0.0, accuracy=0.0))
+            from src.typing_fall.game_core import GameView
+            from src.typing_fall.effects import Effects
+            self.router.go(GameView(self.router, Effects()))
 
         elif symbol == arcade.key.KEY_3:
             from src.typing_fall.views_results_leaderboard import LeaderboardView
