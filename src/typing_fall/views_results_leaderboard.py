@@ -82,7 +82,7 @@ class ResultsView(arcade.View):
 
 
 class LeaderboardView(arcade.View):
-    """Экран рейтинга. Пока заглушка, потом подключим storage.py."""
+    """Экран рейтинга (TOP из SQLite)."""
 
     def __init__(self, router: Router):
         super().__init__()
@@ -92,18 +92,24 @@ class LeaderboardView(arcade.View):
     def on_show_view(self):
         arcade.set_background_color(BG_COLOR)
 
-        # Пока заглушка (после добавления storage.py заменим на реальные данные)
-        self.rows = [
-            "1) Alice — 1200",
-            "2) Bob — 950",
-            "3) You — 100",
-        ]
+        from src.typing_fall.storage import Storage
+
+        storage = Storage()
+        top = storage.top_results(10)
+
+        if not top:
+            self.rows = ["Пока нет результатов. Сыграй первую игру :)"]
+            return
+
+        self.rows = []
+        for i, r in enumerate(top, start=1):
+            self.rows.append(f"{i}) {r.nickname} — {r.score} (WPM {r.wpm:.1f}, {r.accuracy*100:.0f}%)")
 
     def on_draw(self):
         self.clear()
 
         arcade.draw_text(
-            "Рейтинг (TOP)",
+            "Рейтинг (TOP 10)",
             SCREEN_WIDTH / 2,
             SCREEN_HEIGHT * 0.72,
             TEXT_COLOR,
@@ -118,15 +124,15 @@ class LeaderboardView(arcade.View):
                 SCREEN_WIDTH / 2,
                 y,
                 TEXT_COLOR,
-                font_size=22,
+                font_size=18,
                 anchor_x="center",
             )
-            y -= 34
+            y -= 30
 
         arcade.draw_text(
             "ENTER / ESC — в меню",
             SCREEN_WIDTH / 2,
-            SCREEN_HEIGHT * 0.20,
+            SCREEN_HEIGHT * 0.18,
             SUBTEXT_COLOR,
             font_size=18,
             anchor_x="center",
