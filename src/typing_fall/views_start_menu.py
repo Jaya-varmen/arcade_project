@@ -147,5 +147,9 @@ class MenuView(arcade.View):
         self.hint_text.draw()
 
     def on_key_press(self, symbol: int, modifiers: int):
-        if symbol == arcade.key.ESCAPE:
+        if symbol == arcade.key.KEY_1:
+            from src.typing_fall.views_settings import SettingsView
+            self.router.go(SettingsView(self.router))
+
+        elif symbol == arcade.key.ESCAPE:
             arcade.close_window()
